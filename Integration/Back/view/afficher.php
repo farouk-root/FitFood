@@ -19,6 +19,7 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
         <link href="css/button.css" rel="stylesheet" />
+        <link href="css/login.scss" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
         <style> 
 
@@ -108,6 +109,17 @@ $(window).on("load resize ", function() {
 
 
     </head>
+    <body>
+    <section class="container">
+  <h1>
+    <span class="title">Welcome</span>
+    <span class="title">To</span>
+    <span class="title">FITFOOD</span>
+  </h1>
+  
+  <div class="button">restart</div>
+</section>
+    </body>
     <body class="sb-nav-fixed">
         
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -150,8 +162,8 @@ $(window).on("load resize ", function() {
                             </a>
                             <div class="collapse" id="collapseChauffeur" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="chauffeur.php">reservation Tables</a>
-                                    <a class="nav-link" href="comman_chauffeur.php">reservation  Parking</a>
+                                <a class="nav-link" href="afficherReservation.php">Reservation Tables</a>
+                                    <a class="nav-link" href="afficherParking.php">Reservation Parking</a>
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProduit" aria-expanded="false" aria-controls="collapsePages">
@@ -238,6 +250,7 @@ $(window).on("load resize ", function() {
                
     
 </div>
+
                             <div>
                             
                             </div>
@@ -251,5 +264,6 @@ $(window).on("load resize ", function() {
         <script src="assets/demo/chart-bar-demo.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
         <script src="js/datatables-simple-demo.js"></script>
+        <script type="text/javascript" src="/js/animation.js"></script>
     </body>
 </html>

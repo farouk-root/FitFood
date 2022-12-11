@@ -1,7 +1,7 @@
 
 
 <?php 
-include '../config.php';
+include_once '../config.php';
 include_once '../model/comman.php';
 class commanc{
 

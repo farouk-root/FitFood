@@ -1,14 +1,14 @@
 
 
 <?php 
-include '../config1.php';
+include_once '../config.php';
 include_once '../model/payment.php';
 class paymentc{
 
 
 	function afficherpayment(){
 		$sql="SELECT * FROM payment ";
-		$db=config1::getConnexion();
+		$db=config::getConnexion();
 		try{
 			$liste=$db->query($sql);
 			return $liste;
@@ -22,7 +22,7 @@ class paymentc{
 
 		function Ajouter($ser){
 		$sql= "INSERT INTO `payment` VALUES (:id_commande,:name, :expm, :expy, :cvv, :id_payment)";
-		$db=config1::getConnexion();
+		$db=config::getConnexion();
 		try{ $recipesStatement = $db->prepare($sql);
 			$recipesStatement->execute([ 'id_commande'=>$ser->getid_commande(),
 							'name' =>$ser->getname(),
@@ -53,7 +53,7 @@ class paymentc{
 
 		function supprimerpayment($id_payment){
 			$sql="DELETE FROM payment WHERE id_payment=:id_payment";
-			$db = config1::getConnexion();
+			$db = config::getConnexion();
 			$req=$db->prepare($sql);
 			$req->bindValue(':id_payment', $id_payment);
 			try{
@@ -67,8 +67,8 @@ class paymentc{
 
 		function recupererpayment($id_payment){
 			$sql="SELECT * from payment ";
-			$db = config1::getConnexion();
-			//$db = config1::getConnexion();
+			$db = config::getConnexion();
+			//$db = config::getConnexion();
 			$response = $db->query($sql);
 			 $req=$db->prepare($sql);
 			$req->bindValue(':id_payment', $id_payment);
@@ -84,7 +84,7 @@ class paymentc{
 
 		function modifierpayment($payment, $id_payment){
 			try {
-				$db = config1::getConnexion();
+				$db = config::getConnexion();
 				$query = $db->prepare(
 					'UPexpm payment SET 
 					id_commande= :id_commande, 

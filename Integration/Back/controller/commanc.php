@@ -78,19 +78,20 @@ class commanc{
 				die('Erreur:'. $e->getMeesage());
 			}
 		}
-	function recherchercomman($name){
-		$requete ="select * from comman where name like '%$name%'";
-		$db = config::getConnexion();
-		try 
+	
+
+function recherchercomman($nom)
 {
-$querry = $config->prepare($requete);
-$querry->execute();
-$result = $querry->fetchAll();
-return $result ;
-}
-catch (PDOException $th) {
-$th->getMessage();
-}
+	$requete = "select * from comman where name like '%$nom%'";
+	$config = config::getConnexion();
+	try {
+		$querry = $config->prepare($requete);
+		$querry->execute();
+		$result = $querry->fetchAll();
+		return $result ;
+	} catch (PDOException $th) {
+		 $th->getMessage();
+	}
 }
 
 		function modifiercomman($comman, $name){

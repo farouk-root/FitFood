@@ -1,8 +1,14 @@
 <?php
-	include '../Controller/commanc.php';
+	include '../controller/commanc.php';
 	$commanC=new commanc();
   
 	$listecomman=$commanC->affichercomman(); 
+
+    if(isset($_GET['recherche']))
+    { 
+        $listecomman=$commanC->recherchercomman($_GET['recherche']);
+}else
+$listecomman=$commanC->affichercomman();
 
 ?>
 <!DOCTYPE html>
@@ -104,10 +110,10 @@ section{
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
-            <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0" action="" method="GET">
                 <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+                    <input class="form-control" type="research" placeholder="Search for name..." aria-label="Search for..." name="recherche" aria-describedby="btnNavbarSearch" />
+                    <button class="btn btn-primary" id="btnNavbarSearch" type="submit" value="Rechercher" ><i class="fas fa-search" value="Rechercher"></i></button>
                 </div>
             </form>
             <!-- Navbar-->
@@ -231,14 +237,12 @@ section{
                             </div>
                         </div>
 
-<form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
-                <div class="input-group">
-                    <input class="form-control" type="text" placeholder="Search for..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
-                    <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
-                </div>
-            </form>
 
-            <button   class="btn btn-primary"onclick="window.location.href = 'sendemail/index.php';">confirmer la commande</button>
+
+            <center><button   class="btn btn-primary"onclick="window.location.href = 'sendemail/index.php';">confirmer la commande</button></center>
+            <br>
+            <br>
+            <br>
 </section>
 
 
@@ -252,6 +256,7 @@ section{
                  
            <div >
            <center><a href="Ajoutercommande.php" class="button"><img src="assets/img/add.png" width="50" height="50" > Ajouter commande</a> </center>
+           
 </div >
            <div >
   <section>

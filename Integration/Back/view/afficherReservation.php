@@ -158,18 +158,18 @@ $(window).on("load resize ", function() {
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseProduit" aria-expanded="false" aria-controls="collapsePages">
                                 <div class="sb-nav-link-icon"><i class="fas fa-book-open"></i></div>
-                                Produit
+                                Reclamation
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapseProduit" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
-                                    <a class="nav-link" href="destination.php">produit</a>
-                                    <a class="nav-link" href="reservation_sortie.php">catégories</a>
+                                    <a class="nav-link" href="afficherReclamation.php">Reclamations</a>
+            
                                 </nav>
                             </div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapsecommandes" aria-expanded="false" aria-controls="collapseLayouts">
                                 <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
-                                commandes
+                                Commandes
                                 <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
                             </a>
                             <div class="collapse" id="collapsecommandes" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">

@@ -1,9 +1,13 @@
 <?php
-	include '../Controller/parkingc.php';
-    include '../Controller/reservationc.php';
-	$parkingC=new parkingc();
-	$listeparking=$parkingC->afficherparking(); 
+	include '../controller/resolutionC.php';
+    if (!isset($_POST["reclamation_id"])) {
+        header('Location:afficherReclamation.php');
+        exit();
+    }
+
+    $list_resolution = ResolutionC::listReclamationResolutions($_POST["reclamation_id"]);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,92 +20,87 @@
         <title>FitFood - SB Admin</title>
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
         <link href="css/styles.css" rel="stylesheet" />
+        <link href="css/button.css" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="js/utils.js"></script>
+        <script src="js/afficherResolution.js"></script>
         <style> 
+            @import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
+                h1{
+            font-size: 50px;
+            color: #fff;
+            font-weight: 300;
+            text-align: center;
+            margin-bottom: 15px;
+            }
+            table{
+            width:100%;
+            table-layout: fixed;
+
+            }
+            .tbl-header{
+            background-color: rgba(255,255,255,0.3);
+            }
+            .tbl-content{
+            height:300px;
+            overflow-x:auto;
+            margin-top: 0px;
+            border: 1px solid rgba(255,255,255,0.3);
+            
+            }
+            th{
+            padding: 20px 5px;
+            text-align: left;
+            font-weight: 500;
+            font-size: 20px;
+            color: #fff;
+            }
+            td{
+            padding: 20px  ;
+            text-align: middle;
+            vertical-align:middle;
+            font-weight: 300;
+            font-size: 15px;
+            color: #fff;
+            border-bottom: solid 1px rgba(255,255,255,0.1);
+            }
+
+            tr:hover {background-color: gray;}
+
+            /* demo styles */
 
 
+            body{
+            background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+            background: linear-gradient(to right, #25c481, #25b7c4);
+            font-family: 'Roboto', sans-serif;
+            }
+            section{
+            margin: 50px;
+            background: -webkit-linear-gradient(left, #25c481, #25b7c4);
+            background: linear-gradient(to right, #25c481, #25b7c4);
+            font-family: 'Roboto', sans-serif;
+            }
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,300,700);
-	h1{
-  font-size: 50px;
-  color: #fff;
-  font-weight: 300;
-  text-align: center;
-  margin-bottom: 15px;
-}
-table{
-  width:100%;
-  table-layout: fixed;
-
-}
-.tbl-header{
-  background-color: rgba(255,255,255,0.3);
- }
-.tbl-content{
-  height:300px;
-  overflow-x:auto;
-  margin-top: 0px;
-  border: 1px solid rgba(255,255,255,0.3);
-  
-}
-th{
-  padding: 20px 5px;
-  text-align: left;
-  font-weight: 500;
-  font-size: 20px;
-  color: #fff;
-}
-td{
-  padding: 20px  ;
-  text-align: middle;
-  vertical-align:middle;
-  font-weight: 300;
-  font-size: 15px;
-  color: #fff;
-  border-bottom: solid 1px rgba(255,255,255,0.1);
-}
-
-tr:hover {background-color: gray;}
-
-/* demo styles */
-
-
-body{
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-  font-family: 'Roboto', sans-serif;
-}
-section{
-  margin: 50px;
-  background: -webkit-linear-gradient(left, #25c481, #25b7c4);
-  background: linear-gradient(to right, #25c481, #25b7c4);
-  font-family: 'Roboto', sans-serif;
-}
-
-::-webkit-scrollbar {
-    width: 6px;
-} 
-::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-} 
-::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
-}
-
-
-
-
-</style>
-
-<script>
-	// '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
-$(window).on("load resize ", function() {
-  var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
-  $('.tbl-header').css({'padding-right':scrollWidth});
-}).resize();
-</script>
-    
+            ::-webkit-scrollbar {
+                width: 6px;
+            } 
+            ::-webkit-scrollbar-track {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            } 
+            ::-webkit-scrollbar-thumb {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+            }
+        </style>
+        <script>
+            // '.tbl-content' consumed little space for vertical scrollbar, scrollbar width depend on browser/os/platfrom. Here calculate the scollbar width .
+            $(window).on("load resize ", function() {
+            var scrollWidth = $('.tbl-content').width() - $('.tbl-content table').width();
+            $('.tbl-header').css({'padding-right':scrollWidth});
+            }).resize();
+        </script>
     </head>
+
     <body class="sb-nav-fixed">
         
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -220,74 +219,66 @@ $(window).on("load resize ", function() {
                                     </div>
                                 </nav>
                             </div>
-                           
-                            
                         </div>
                     </div>
-                   
                 </nav>
             </div>
-            <div id="layoutSidenav_content">
-                
-                </main>
 
-                            
-                        <div >
-                <center><a href="AjouterParking.php" class="button"><img src="assets/img/add.png" width="50" height="50" > Ajouter Table</a> </center>
-</div >
-<div >
-	   <section>
-		<center><h1>Liste des reservations Parking </h1></center>
-		<div class="tbl-header">
-		<table cellpadding="0" cellspacing="0" border="0" align="center">
-		<thead>
-			<tr>
-				<th>matricule</th>
-				<th>name</th>
-				<th>Date</th>
-                <th>placepark</th>
-				
-				<th>id_client</th>
-				<th>id_table</th>
-				<th>Modifier</th>
-				<th>Supprimer</th>
-				</thead>
-			</tr>
-			</table>
-			</div>
-			
-			<div class="tbl-content">
-			<table cellpadding="0" cellspacing="0" border="0" align="center">
-			<tbody>
-			<?php
-			foreach($listeparking as $parkingC){
-			?>
-			<tr>
-		 		<td><?php echo $parkingC['matricule']; ?></td>
-				<td><?php echo $parkingC['name']; ?></td>
-		 		<td><?php echo $parkingC['date']; ?></td>
-				<td><?php echo $parkingC['placepark']; ?></td>
-		 		<td><?php echo $parkingC['id_client']; ?></td>
-		 		<td><?php echo $parkingC['id_table']; ?></td>
-				<td>
-		 			<form method="POST" action="modifierParking.php">
-					<input type="image" src="assets/img/update (1).png" width="50" height="50" name="Modifier" value="Modifier" > 
-	 				<input type="hidden" value=<?PHP echo $parkingC['matricule']; ?> name="matricule">
-		 			</form>
-		 		</td>
-		<td>
-		 			<a href="supprimerReservation.php?matricule=<?php echo $parkingC['matricule']; ?>"><img src="assets/img/delete.png" width="50" height="50" ></a>
-				</td>
-		 	</tr>
-		 	<?php
-		 		}
-		 	?>
-		 </tbody>
-    </table>
-  </div>
-</section>
-    
-</div>
+            <div>
+                <section>
+                    <center><h1>Resolution</h1></center>
+                    <div class="tbl-header">
+                        <table cellpadding="0" cellspacing="0" border="0" align="center">
+                            <tr>
+                                <thead>
+                                    <th onclick="sortTable(0, 'resolution_table')">id</th>
+                                    <th onclick="sortTable(1, 'resolution_table')">reclamation_id</th>
+                                    <th>view</th>
+                                    <th>update</th>
+                                    <th>delete</th>
+                                </thead>
+                            </tr>
+                        </table>
+                    </div>
+            
+                    <div class="tbl-content">
+                        <table cellpadding="0" cellspacing="0" border="0" align="center">
+                            <tbody id="resolution_table">
+							    <?php
+                                foreach($list_resolution as $resolution) {
+                                ?>
+                                <tr>
+                                    <td><?php echo $resolution['id']; ?></td>
+                                    <td><?php echo $resolution['reclamation_id']; ?></td>
+                                    <td>
+                                        <form method="POST" action="viewResolution.php">
+                                            <input type="image" src="assets/img/view_.png" width="50" height="50" alt="Submit"> 
+                                            <input type="hidden" value=<?PHP echo $resolution['id']; ?> name="id">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <form method="POST" action="modifyResolution.php">
+                                            <input type="image" src="assets/img/update (1).png" width="50" height="50" alt="Submit"> 
+                                            <input type="hidden" value=<?PHP echo $resolution['id']; ?> name="id">
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="deleteResolution.php?id=<?php echo $resolution['id']; ?>"><img src="assets/img/delete.png" width="50" height="50" ></a>
+                                    </td>
+                                </tr>
+                                <?php
+                                }
+                                ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <form method="POST" action="addResolution.php">
+                        <input type="submit" src="assets/img/add.png" style="padding-left: 20px; padding-right: 20px; padding-bottom: 5px; padding-top: 5px; border-radius: 20px; margin-top: 10px; margin-left: 10px; background-color: #000000; color: #ffffff; font-size: 26px; font-weight:bold" value="Add" alt="Submit"> 
+                        <input type="hidden" value=<?PHP echo $_POST['reclamation_id']; ?> name="reclamation_id">
+                    </form>
+                </section>
+            </div>
+        </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>

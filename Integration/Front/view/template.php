@@ -112,8 +112,12 @@ else
                     <a class="nav-link" href="#contact">Contact Us</a>
                 </li>
                 <li class="nav-item">
+                    <a href="viewReclamations.php" class="btn btn-primary ml-xl-4">Reclamation</a>
+                </li>
+                <li class="nav-item">
                     <a href="order_form.php" class="btn btn-primary ml-xl-4">Order</a>
                 </li>
+
             </ul>
         </div>
     </nav>

@@ -63,7 +63,7 @@
 	
 
 	// Database connection
-	$conn = new mysqli('localhost','root','','fadi');
+	$conn = new mysqli('localhost','root','','integration');
 	if($conn->connect_error){
 		echo "$conn->connect_error";
 		die("Connection Failed : ". $conn->connect_error);

@@ -37,13 +37,14 @@
 </html>
 <?php
 	$id_commande = $_POST['id_commande'];
+	echo "<h1>".$id_commande."</h1>";
 	$name = $_POST['name'];
 	$expm = $_POST['expm'];
 	$expy= $_POST['expy'];
     $cvv = $_POST['cvv'];
 	 
 	// Database connection
-	$conn = new mysqli('localhost','root','','fadi');
+	$conn = new mysqli('localhost','root','','integration');
 	if($conn->connect_error){
 		echo "$conn->connect_error";
 		die("Connection Failed : ". $conn->connect_error);

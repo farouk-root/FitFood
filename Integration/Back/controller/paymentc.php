@@ -21,7 +21,7 @@ class paymentc{
 
 
 		function Ajouter($ser){
-		$sql= "INSERT INTO `payment` VALUES (:id_commande,:name, :expm, :expy, :cvv, :id_payment)";
+		$sql= "INSERT INTO `payment` VALUES (:id_commande,:name, :expm, :expy, :cvv, NULL)";
 		$db=config::getConnexion();
 		try{ $recipesStatement = $db->prepare($sql);
 			$recipesStatement->execute([ 'id_commande'=>$ser->getid_commande(),
@@ -30,7 +30,7 @@ class paymentc{
 							'expy'=>$ser->getexpy(),
 							'cvv'=>$ser->getcvv(),
 							
-							'id_payment'=>$ser->getid_payment(),
+							//'id_payment'=>$ser->getid_payment(),
 							
 									
 								

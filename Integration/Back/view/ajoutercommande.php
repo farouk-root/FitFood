@@ -12,7 +12,7 @@ if (isset($_POST['name'])&&isset($_POST['address'])&&isset($_POST['tel'])&&isset
 {
     if (!empty($_POST['name'])&&!empty($_POST['address'])&&!empty($_POST['tel'])&&!empty($_POST['email'])&&!empty($_POST['city']))
     {
-        $adherent= new comman($_POST['name'],$_POST['address'],$_POST['tel'],$_POST['email'],$_POST['city']);
+        $adherent= new comman($_POST['name'],$_POST['address'],$_POST['tel'],$_POST['email'],$_POST['city'],NULL);
         
         $adC->Ajouter($adherent);
         header('Location:afficher.php');

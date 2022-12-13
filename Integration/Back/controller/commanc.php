@@ -21,7 +21,7 @@ class commanc{
 
 
 		function Ajouter($ser){
-		$sql= "INSERT INTO `comman` VALUES (:name,:address, :tel, :email, :city)";
+		$sql= "INSERT INTO `comman` VALUES (:name,:tel, :email, :address, :city ,NULL)";
 		$db=config::getConnexion();
 		try{ $recipesStatement = $db->prepare($sql);
 			$recipesStatement->execute([ 'name'=>$ser->getname(),
@@ -29,7 +29,7 @@ class commanc{
 							'tel'=>$ser->gettel(),
 							'email'=>$ser->getemail(),
 							'city'=>$ser->getcity(),
-							'id_commande'=>$ser->getid_commande(),
+							//'id_commande'=>$ser->getid_commande(),
 								
 									
 								

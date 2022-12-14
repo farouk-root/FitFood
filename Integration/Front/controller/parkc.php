@@ -1,14 +1,13 @@
 
 
 <?php 
+include_once '../config.php';
+include_once '../model/park.php';
+class parkc{
 
-//include_once '../config.php';
-include_once '../model/parking.php';
-class parkingc{
 
-
-	function afficherparking(){
-		$sql="SELECT * FROM parking ";
+	function afficherpark(){
+		$sql="SELECT * FROM park ";
 		$db=config::getConnexion();
 		try{
 			$liste=$db->query($sql);
@@ -20,8 +19,52 @@ class parkingc{
 	} 
 
 
+	function recupererPark($placepark){
+		$sql="SELECT * from park where placepark=$placepark";
+		//$sql="SELECT * from parking WHERE matricule=:matricule";
+		$db = config::getConnexion();
+		$response = $db->query($sql);
+		try{
+		return $response->fetch();
+		}
+		catch(Exception $e){
+			die('Erreur:'. $e->getMeesage());
+		}
+	}
 
-		function Ajouter($ser){
+// I made these functions disabled because I dont need them now 
+// The management of the park is static , in fact I dont need to update 
+// the park or delete it . It's a Building composed of different blocs 
+
+//The only thing that'll be updated is the number of places in each Bloc , 
+//the client reserves a  place so I'll update the nbr of places .
+
+function updatePark($placepark)
+{
+
+	try {
+		$db = config::getConnexion();
+		$query = $db->prepare(
+			'UPDATE `park` SET `nb_places` :=`nb_places` - 1  WHERE `park`.`placepark` = :placepark '
+						
+		);
+		$query->execute([
+			//'nb_places' => $parking->getNbr_places(),
+			/*'Bloc' => $parking->getBloc(),*/
+			'placepark' => $placepark
+
+		]);
+		echo $query->rowCount() . " records UPDATED successfully <br>";
+	} catch (PDOException $e) {
+		$e->getMessage();
+	}
+
+}
+
+
+
+
+		/*function Ajouter($ser){
 		$sql= "INSERT INTO `parking` VALUES (:matricule,:name, :date, :placepark, :id_client,:id_table)";
 		$db=config::getConnexion();
 		try{ $recipesStatement = $db->prepare($sql);
@@ -62,27 +105,12 @@ class parkingc{
 			catch(Exception $e){
 				die('Erreur:'. $e->getMeesage());
 			}
-		}
+		}*/
 
-
-		function recupererParking($matricule){
-			$sql="SELECT * from parking where matricule=$matricule";
-			//$sql="SELECT * from parking WHERE matricule=:matricule";
-			$db = config::getConnexion();
-			$response = $db->query($sql);
-			// $req=$db->prepare($sql);
-			// $req->bindValue(':matricule', $matricule);
-			try{
-			return $response->fetch();
-			}
-			catch(Exception $e){
-				die('Erreur:'. $e->getMeesage());
-			}
-		}
 		
 	
 
-		function modifierParking($parking, $matricule){
+		/*function modifierParking($parking, $matricule){
 			try {
 				$db = config::getConnexion();
 				$query = $db->prepare(
@@ -107,7 +135,7 @@ class parkingc{
 				$e->getMessage();
 			}
 		}
-
+*/
 		
 	 
 }

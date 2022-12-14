@@ -37,7 +37,7 @@
 </html>
 <?php
 	$id_commande = $_POST['id_commande'];
-	echo "<h1>".$id_commande."</h1>";
+	//echo "<h1>".$id_commande."</h1>";
 	$name = $_POST['name'];
 	$expm = $_POST['expm'];
 	$expy= $_POST['expy'];
@@ -50,7 +50,7 @@
 		die("Connection Failed : ". $conn->connect_error);
 	} else {
 		$stmt = $conn->prepare("insert into payment(id_commande, name, expm, expy, cvv) values(?, ?, ?, ?, ?)");
-		$stmt->bind_param("isiii",$id_commande,$name,$expm,$expy,$cvv);
+		$stmt->bind_param("isiii",$id_commande,$name,$expm,$expy,$cvv,NULL);
 		$execval = $stmt->execute();
 		
 		

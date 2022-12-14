@@ -96,6 +96,9 @@ else
                 <li class="nav-item">
                     <a class="nav-link" href="#book-table">Book-Table</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="ajouterParking.php">Parking</a>
+                </li>
             </ul>
             <a class="navbar-brand m-auto" href="#">
                 <img src="assets/imgs/logo.svg" class="brand-img" alt="">
